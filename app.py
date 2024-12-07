@@ -8,23 +8,23 @@ with open("xg_obesity_level.pkl",'rb') as file:
     model = pickle.load(file)
 
 st.title("Obesty Level Classification")
-st.write("This application classifies Obesity level into Obesity Type III, Obesity Type II, Obesity Type I, Overweight Level II, Overweight Level I, Normal Weight, Insufficient Weight using RandomForest")
+st.write("This application uses XGBoost to categorise obesity levels into Type III, Type II, Type I, Overweight Level II, Overweight Level I, Normal Weight, and Insufficient Weight.")
 st.subheader("Enter Your Information")
 
 gender = st.selectbox("Gender",["Male", "Female"])
 age = st.number_input("Age", min_value=0, max_value=100)
 height = st.number_input("Height (cm)",min_value=0,max_value=200)
 weight = st.number_input("Weight (kg)", min_value=0,max_value=150)
-family_history = st.selectbox('Family History with Overweight',["Yes","No"])
+family_history = st.selectbox('Do you have any family history of being overweight?',["Yes","No"])
 favc = st.selectbox('Do you eat high caloric food frequently?',["Yes","No"])
-fcvc = st.number_input('Give the rating of 1-3 for eating vegetables in your meals.',min_value=1, max_value=3)
-ncp = st.number_input('How many main meals do you have daily?',min_value=1, max_value=4)
-caec = st.number_input('Do you eat any food between meals?',min_value=1, max_value=3)
+fcvc = st.number_input('Rate the amount of veggies you include in your meals on a scale of 1 to 3.',min_value=1, max_value=3)
+ncp = st.number_input('On a scale of 1 to 4, indicate how many main meals you eat each day.',min_value=1, max_value=4)
+caec = st.number_input('Rate if you eat anything in between meals on a scale of 1 to 3.',min_value=1, max_value=3)
 smoke = st.selectbox("Do you smoke?",["Yes", "No"])
-ch2o = st.number_input('How much water do you drink daily?',min_value=1, max_value=3)
+ch2o = st.number_input('How much water do you drink daily? (1-3 liters)',min_value=1, max_value=3)
 scc = st.selectbox('Do you monitor the calories you eat daily?',["Yes", "No"])
-faf = st.selectbox('How often do you have physical activity?',['Regular','Sometimes','No'])
-tue = st.selectbox('How much time do you use technological devices such as cell phone, videogames, television, computer and others?',['Low','Moderate','High'])
+faf = st.selectbox('How frequently do you engage in physical activity?',['Yes','No','Frequently'])
+tue = st.selectbox('How much often do you use Electronic devices such as cell phone, videogames, television, computer and others?',['Low','Moderate','High'])
 bmi = st.number_input("Enter your Body Mass Index value",min_value=12,max_value=55)
 calc = st.selectbox('How often do you drink alcohol?',['Yes','No','Frequently'])
 
@@ -35,7 +35,7 @@ input_data = pd.DataFrame({'Gender': [1 if gender=='Male' else 0],'Age':[age],'H
                            'SMOKE':[1 if smoke=='Yes' else 0],
                            'CH2O':[ch2o],
                            'SCC':[1 if scc=='Yes' else 0],
-                           'FAF':[2 if faf=='Regular' else(1 if faf=='Sometimes' else 0)],
+                           'FAF':[2 if faf=='Yes' else(1 if faf=='Frequently' else 0)],
                            'TUE':[2 if tue=='High' else(1 if tue=='Moderate' else 0)],
                            'CALC':[1 if calc=='Yes' else(0 if calc=='No' else 2)],'BMI':[bmi]
                            })
@@ -67,7 +67,7 @@ def add_background(image_url):
     background_style = f"""
     <style>
     .stApp {{
-        background-image: url("{'https://www.heart.org/-/media/Images/News/2022/January-2022/0112BHObesityBrain_SC.jpg?sc_lang=en'}");
+        background-image: url("{'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLS7qcvGo8P_srGFqAOUMN1E-xDwaPG1vVGQ&s'}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -77,6 +77,6 @@ def add_background(image_url):
     st.markdown(background_style, unsafe_allow_html=True)
 
 # Main app
-add_background("https://www.heart.org/-/media/Images/News/2022/January-2022/0112BHObesityBrain_SC.jpg?sc_lang=en")  # Replace with your image URL
+add_background("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLS7qcvGo8P_srGFqAOUMN1E-xDwaPG1vVGQ&s")  # Replace with your image URL
 
 
