@@ -67,7 +67,7 @@ def add_background(image_url):
     background_style = f"""
     <style>
     .stApp {{
-        background-image: url("{'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLS7qcvGo8P_srGFqAOUMN1E-xDwaPG1vVGQ&s'}");
+        background-image: url("{'https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-5-11-world-anti-obesity-day-simple-texture-image_216881.jpg'}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -77,6 +77,6 @@ def add_background(image_url):
     st.markdown(background_style, unsafe_allow_html=True)
 
 # Main app
-add_background("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLS7qcvGo8P_srGFqAOUMN1E-xDwaPG1vVGQ&s")  # Replace with your image URL
+add_background("https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-5-11-world-anti-obesity-day-simple-texture-image_216881.jpg")  # Replace with your image URL
 
 
