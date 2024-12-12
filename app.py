@@ -40,22 +40,23 @@ calc = st.selectbox('How often do you drink alcohol?',['Yes','No','Frequently'])
 
 
 # Prepare input data for prediction
-if bmi is not None:
-    input_data = pd.DataFrame({'Gender': [1 if gender=='Male' else 0],'Age':[age],'Height':[height],'Weight':[weight],
-                               'family_history_with_overweight': [1 if family_history=='Yes' else 0],
-                                'FAVC':[1 if favc=='Yes' else 0],
-                                'FCVC':[fcvc],'NCP':[ncp],'CAEC':[caec],
-                                'SMOKE':[1 if smoke=='Yes' else 0],
-                                'CH2O':[ch2o],
-                                'SCC':[1 if scc=='Yes' else 0],
-                                'FAF':[2 if faf=='Yes' else(1 if faf=='Frequently' else 0)],
-                                'TUE':[2 if tue=='High' else(1 if tue=='Moderate' else 0)],
-                                'CALC':[1 if calc=='Yes' else(0 if calc=='No' else 2)],'BMI':[bmi]
-                                })
+
+input_data = pd.DataFrame({'Gender': [1 if gender=='Male' else 0],'Age':[age],'Height':[height],'Weight':[weight],
+                           'family_history_with_overweight': [1 if family_history=='Yes' else 0],
+                           'FAVC':[1 if favc=='Yes' else 0],
+                           'FCVC':[fcvc],'NCP':[ncp],'CAEC':[caec],
+                           'SMOKE':[1 if smoke=='Yes' else 0],
+                           'CH2O':[ch2o],
+                           'SCC':[1 if scc=='Yes' else 0],
+                           'FAF':[2 if faf=='Yes' else(1 if faf=='Frequently' else 0)],
+                           'TUE':[2 if tue=='High' else(1 if tue=='Moderate' else 0)],
+                           'CALC':[1 if calc=='Yes' else(0 if calc=='No' else 2)],
+                           'BMI':[bmi]
+                           })
 
 
 expected_oder = ['Gender', 'Age', 'Height', 'Weight','family_history_with_overweight',
-                 'FAVC', 'FCVC', 'NCP', 'CAEC','SMOKE', 'CH2O', 'SCC', 'FAF', 'TUE', 'CALC', 'BMI']
+                 'FAVC', 'FCVC', 'NCP', 'CAEC','SMOKE', 'CH2O', 'SCC', 'FAF', 'TUE', 'CALC','BMI']
 
 input_data = input_data.reindex(columns=expected_oder)
 
@@ -70,7 +71,7 @@ if st.button("Predict"):
     4: 'Obesity_Type_I',
     5: 'Obesity_Type_II',
     6: 'Obesity_Type_III'}
-    
+
     result = label_mapping.get(predicted_label, "Unknown")
     st.write(f'The predicted test result is : **{result}**')
 else:
