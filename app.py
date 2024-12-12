@@ -55,10 +55,10 @@ input_data = pd.DataFrame({'Gender': [1 if gender=='Male' else 0],'Age':[age],'H
                            })
 
 
-expected_oder = ['Gender', 'Age', 'Height', 'Weight','family_history_with_overweight',
+expected_order = ['Gender', 'Age', 'Height', 'Weight','family_history_with_overweight',
                  'FAVC', 'FCVC', 'NCP', 'CAEC','SMOKE', 'CH2O', 'SCC', 'FAF', 'TUE', 'CALC','BMI']
 
-input_data = input_data.reindex(columns=expected_oder)
+input_data = input_data.reindex(columns=expected_order)
 
 if st.button("Predict"):
     prediction = model.predict(input_data)
