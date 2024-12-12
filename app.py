@@ -1,4 +1,4 @@
-import streamlit as st # type: ignore
+import streamlit as st 
 import pandas as pd
 import pickle
 from xgboost import XGBClassifier # type: ignore # typo: ignore
@@ -36,7 +36,6 @@ ch2o = st.number_input('How much water do you drink daily? (1-3 liters)',min_val
 scc = st.selectbox('Do you monitor the calories you eat daily?',["Yes", "No"])
 faf = st.selectbox('How frequently do you engage in physical activity?',['Yes','No','Frequently'])
 tue = st.selectbox('How much often do you use Electronic devices such as cell phone, videogames, television, computer and others?',['Low','Moderate','High'])
-bmi = st.number_input("Enter your Body Mass Index value",min_value=12,max_value=55)
 calc = st.selectbox('How often do you drink alcohol?',['Yes','No','Frequently'])
 
 
@@ -75,6 +74,9 @@ if st.button("Predict"):
 }
     result = label_mapping.get(predicted_label, "Unknown")
     st.write(f'The predicted test result is : **{result}**')
+else:
+    st.write("Please provide height and weight to calculate BMI before predicting.")
+
 
 
 # Add background image using custom CSS
