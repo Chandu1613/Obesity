@@ -79,21 +79,7 @@ else:
 
 
 
-# Add background image using custom CSS
-def add_background(image_url):
-    background_style = f"""
-    <style>
-    .stApp {{
-        background-image: url("{'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4o3bwfJJwlPLpEkutXueMBvh3F3W0-UbDeA&s'}");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }}
-    </style>
-    """
-    st.markdown(background_style, unsafe_allow_html=True)
 
-# Main app
-add_background("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4o3bwfJJwlPLpEkutXueMBvh3F3W0-UbDeA&s")  # Replace with your image URL
+
 
 
