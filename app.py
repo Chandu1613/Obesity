@@ -11,10 +11,21 @@ st.title("Obesty Level Classification")
 st.write("This application uses XGBoost to categorise obesity levels into Type III, Type II, Type I, Overweight Level II, Overweight Level I, Normal Weight, and Insufficient Weight.")
 st.subheader("Enter Your Information")
 
+# User inputs
 gender = st.selectbox("Gender",["Male", "Female"])
 age = st.number_input("Age", min_value=0, max_value=100)
 height = st.number_input("Height (cm)",min_value=0,max_value=200)
 weight = st.number_input("Weight (kg)", min_value=0,max_value=150)
+
+# Calculate BMI dynamically
+if height > 0 and weight > 0:
+    bmi = round(weight / ((height / 100) ** 2), 2)
+    st.write(f"**Your calculated BMI is:** {bmi}")
+else:
+    bmi = None
+    st.write("Please enter valid height and weight to calculate BMI.")
+
+# Remaining inputs
 family_history = st.selectbox('Do you have any family history of being overweight?',["Yes","No"])
 favc = st.selectbox('Do you eat high caloric food frequently?',["Yes","No"])
 fcvc = st.number_input('Rate the amount of veggies you include in your meals on a scale of 1 to 3.',min_value=1, max_value=3)
@@ -28,7 +39,10 @@ tue = st.selectbox('How much often do you use Electronic devices such as cell ph
 bmi = st.number_input("Enter your Body Mass Index value",min_value=12,max_value=55)
 calc = st.selectbox('How often do you drink alcohol?',['Yes','No','Frequently'])
 
-input_data = pd.DataFrame({'Gender': [1 if gender=='Male' else 0],'Age':[age],'Height':[height],'Weight':[weight],
+
+# Prepare input data for prediction
+if bmi is not None:
+    input_data = pd.DataFrame({'Gender': [1 if gender=='Male' else 0],'Age':[age],'Height':[height],'Weight':[weight],
                            'family_history_with_overweight': [1 if family_history=='Yes' else 0],
                            'FAVC':[1 if favc=='Yes' else 0],
                            'FCVC':[fcvc],'NCP':[ncp],'CAEC':[caec],
@@ -39,6 +53,7 @@ input_data = pd.DataFrame({'Gender': [1 if gender=='Male' else 0],'Age':[age],'H
                            'TUE':[2 if tue=='High' else(1 if tue=='Moderate' else 0)],
                            'CALC':[1 if calc=='Yes' else(0 if calc=='No' else 2)],'BMI':[bmi]
                            })
+
 
 expected_oder = ['Gender', 'Age', 'Height', 'Weight',
        'family_history_with_overweight', 'FAVC', 'FCVC', 'NCP', 'CAEC',
